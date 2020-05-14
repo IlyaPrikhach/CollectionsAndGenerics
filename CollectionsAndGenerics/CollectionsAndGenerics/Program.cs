@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace CollectionsAndGenerics
 {
@@ -59,19 +59,24 @@ namespace CollectionsAndGenerics
             }
             else if (ch == "4")
             {
+                collForWrite(collectionType, allCollections);
 
             }
             else if (ch == "5")
             {
+                collForSort(collectionType, allCollections);
 
             }
             else if (ch == "6")
             {
+                collectionType.elemFind(allCollections);
+                Chois(collectionType, allCollections);
 
             }
             else if (ch == "7")
             {
-
+                collectionType.negativeFind(allCollections);
+                Chois(collectionType, allCollections);
             }
             else if (ch == "8")
             {
@@ -134,17 +139,17 @@ namespace CollectionsAndGenerics
             }
             else if (ch == "2")
             {
-                collectionType.CollectionRemove(allCollections[0], 1);
+                collectionType.CollectionRemove(allCollections[1], 2);
 
             }
             else if (ch == "3")
             {
-                collectionType.CollectionRemove(allCollections[0], 1);
+                collectionType.CollectionRemove(allCollections[2], 3);
 
             }
             else if (ch == "4")
             {
-                collectionType.CollectionRemove(allCollections[0], 1);
+                collectionType.CollectionRemove(allCollections[3], 4);
 
             }
             else
@@ -165,17 +170,17 @@ namespace CollectionsAndGenerics
             }
             else if (ch == "2")
             {
-                collectionType.CollectionView(allCollections[0], 1);
+                collectionType.CollectionView(allCollections[1], 2);
 
             }
             else if (ch == "3")
             {
-                collectionType.CollectionView(allCollections[0], 1);
+                collectionType.CollectionView(allCollections[2], 3);
 
             }
             else if (ch == "4")
             {
-                collectionType.CollectionView(allCollections[0], 1);
+                collectionType.CollectionView(allCollections[3], 4);
 
             }
             else
@@ -186,12 +191,79 @@ namespace CollectionsAndGenerics
             Chois(collectionType, allCollections);
         }
 
+        static void collForWrite(CollectionType<Dictionary<int, int>> collectionType, List<Dictionary<int, int>> allCollections)
+        {
+            Console.WriteLine("Элемены из какой коллекции вы хотите записать?(1/2/3/4)");
+            string ch = Console.ReadLine();
+            if (ch == "1")
+            {
+                collectionType.CollectionWrite(allCollections[0], 1);
+            }
+            else if (ch == "2")
+            {
+                collectionType.CollectionWrite(allCollections[1], 2);
+
+            }
+            else if (ch == "3")
+            {
+                collectionType.CollectionWrite(allCollections[2], 3);
+
+            }
+            else if (ch == "4")
+            {
+                collectionType.CollectionWrite(allCollections[3], 4);
+
+            }
+            else
+            {
+                Console.WriteLine("Такой коллекции не существует, попробуйте снова");
+                collForWrite(collectionType, allCollections);
+            }
+            Chois(collectionType, allCollections);
+        }
+
+        static void collForSort(CollectionType<Dictionary<int, int>> collectionType, List<Dictionary<int, int>> allCollections)
+
+        
+        {
+
+            {
+                Console.WriteLine("Элемены из какой коллекции вы хотите записать?(1/2/3/4)");
+                string ch = Console.ReadLine();
+                if (ch == "1")
+                {
+                    collectionType.CollectionSort(allCollections[0], 1);
+                }
+                else if (ch == "2")
+                {
+                    collectionType.CollectionSort(allCollections[1], 2);
+
+                }
+                else if (ch == "3")
+                {
+                    collectionType.CollectionSort(allCollections[2], 3);
+
+                }
+                else if (ch == "4")
+                {
+                    collectionType.CollectionSort(allCollections[3], 4);
+
+                }
+                else
+                {
+                    Console.WriteLine("Такой коллекции не существует, попробуйте снова");
+                    collForSort(collectionType, allCollections);
+                }
+                Chois(collectionType, allCollections);
+            }
+        }
+
     }
 
 
 
 
-    class CollectionType<T>
+    class CollectionType<T> 
     {
         public T Id { get; set; }
         List<Dictionary<int, int>> collections;
@@ -234,7 +306,7 @@ namespace CollectionsAndGenerics
                     }
                     else
                     {
-                        forEntry.Add(i, Convert.ToInt32(numb1));
+                        forEntry.Add( i, Convert.ToInt32(numb1));
                     }
 
                 }
@@ -312,15 +384,272 @@ namespace CollectionsAndGenerics
             Console.Clear();
         }
 
+        public void CollectionWrite(Dictionary<int, int> forWrite, int n)
+        {
+            StreamWriter writer = new StreamWriter("Outlet.out");
+            writer.WriteLine($"Данные {n} коллекции");
+
+            foreach (KeyValuePair<int, int> keyValue in forWrite)
+            {
+                writer.WriteLine(keyValue.Key + " - " + keyValue.Value);
+            }
+            Console.WriteLine("Данные были записаны в файл");
+            writer.Close();
+            do
+            {
+                Console.WriteLine("Для продолжения нажмите пробел");
+            }
+            while (Console.ReadKey().Key != ConsoleKey.Spacebar);
+            Console.Clear();
+        }
+
+        public void CollectionSort(Dictionary<int, int> forSort, int n)
+        {
+            forSort = forSort.OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+            Console.WriteLine("Отсортированно по значению");
+            foreach (var item in forSort)
+            {
+                Console.WriteLine(item.Key + " - " + item.Value);
+            }
+            do
+            {
+                Console.WriteLine("Для продолжения нажмите пробел");
+            }
+            while (Console.ReadKey().Key != ConsoleKey.Spacebar);
+            Console.Clear();
+        }
+
+        public void elemFind(List<Dictionary<int,int>> forFind)
+        {
+            Dictionary<int, int> firstDic = forFind[0];
+            Dictionary<int, int> secondDic = forFind[1];
+            Dictionary<int, int> thirdDic = forFind[2];
+            Dictionary<int, int> forthDic = forFind[3];
+
+            Console.WriteLine("Введите число, которое нужно найти");
+            int n = Convert.ToInt32(Console.ReadLine());
+
+            IEnumerable<int> first =
+                from f in firstDic.Values
+                where f == n
+                select f;
+            IEnumerable<int> second =
+                from f in secondDic.Values
+                where f == n
+                select f;
+            IEnumerable<int> third =
+                from f in thirdDic.Values
+                where f == n
+                select f;
+            IEnumerable<int> forth =
+                from f in forthDic.Values
+                where f == n
+                select f;
+            int x1 = 0;
+            int x2 = 0;
+            int x3 = 0;
+            int x4 = 0;
+            Console.WriteLine("Такая величина есть\n------------------------------------------------------------------------------------------------------------------------");
+
+            int r = 0;
+            foreach (int a in first)
+            {
+                Console.WriteLine("В первой коллекции ");
+                x1 = 1;
+                r++;
+            }
+                
+            foreach (int a in second)
+            {
+                Console.WriteLine("Во второй коллекции ");
+                x2 = 1;
+                r++;
+            }
+                
+            foreach (int a in third)
+            {
+                Console.WriteLine("В третьей коллекции ");
+                x3 = 1;
+                r++;
+            }
+            foreach (int a in forth)
+            {
+                Console.WriteLine("В четвертой коллекции ");
+                x4 = 1;
+                r++;
+            }
+            Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+
+            int[] nums = new int[r];
+            int nr = 0;
+            if (x1 == 1)
+            {
+                x1 = firstDic.Count();
+                nums[nr] = x1;
+                nr++;
+            }
+            if (x2 == 1)
+            {
+                x2 = secondDic.Count();
+                nums[nr] = x2;
+                nr++;
+
+            }
+            if (x3 == 1)
+            {
+
+                x3 = thirdDic.Count();
+                nums[nr] = x3;
+                nr++;
+
+            }
+            if (x4 == 1)
+            {
+
+                x4 = forthDic.Count();
+                nums[nr] = x4;
+            }
+            if(x1 != 1 && x2 != 1 && x3 != 1 && x4 != 1)
+            {
+                Console.WriteLine("Коллекций содержащих данный элемент нет");
+                
+            }
+
+            if (nr != 0)
+            {
+                int temp;
+                for (int i = 0; i < nums.Length - 1; i++)
+                {
+                    for (int j = i + 1; j < nums.Length; j++)
+                    {
+                        if (nums[i] > nums[j])
+                        {
+                            temp = nums[i];
+                            nums[i] = nums[j];
+                            nums[j] = temp;
+                        }
+                    }
+                }
+                Console.WriteLine("Вывод отсортированного массива");
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    Console.WriteLine(nums[i]);
+                }
+                int min = 0;
+                int max = 0;
+                if (firstDic.Count == nums[0])
+                {
+                    min = 1;
+                }
+                if (secondDic.Count == nums[0])
+                {
+                    min = 2;
+                }
+                if (thirdDic.Count == nums[0])
+                {
+                    min = 3;
+                }
+                if (forthDic.Count == nums[0])
+                {
+                    min = 4;
+                }
+
+                if (firstDic.Count == nums[nr])
+                {
+                    max = 1;
+                }
+                if (secondDic.Count == nums[nr])
+                {
+                    max = 2;
+                }
+                if (thirdDic.Count == nums[nr])
+                {
+                    max = 3;
+                }
+                if (forthDic.Count == nums[nr])
+                {
+                    max = 4;
+                }
+
+
+
+                Console.WriteLine("Минимальная коллекция содержащая этот элемент - " + min + " Содержит " + nums[0] + " элементов" + "\nМаксимальная коллекция содержащая этот элемент - " + max + " содержит " + nums[nr] + " элементов");
+
+            }
+
+            do
+            {
+                Console.WriteLine("Для продолжения нажмите пробел");
+            }
+            while (Console.ReadKey().Key != ConsoleKey.Spacebar);
+            Console.Clear();
+        }
+
+        public void negativeFind(List<Dictionary<int, int>> forFind)
+        {
+            Dictionary<int, int> firstDic = forFind[0];
+            Dictionary<int, int> secondDic = forFind[1];
+            Dictionary<int, int> thirdDic = forFind[2];
+            Dictionary<int, int> forthDic = forFind[3];
+
+            IEnumerable<int> first =
+                from f in firstDic.Values
+                where f < 0
+                select f;
+            IEnumerable<int> second =
+                from f in secondDic.Values
+                where f < 0
+                select f;
+            IEnumerable<int> third =
+                from f in thirdDic.Values
+                where f < 0
+                select f;
+            IEnumerable<int> forth =
+                from f in forthDic.Values
+                where f < 0
+                select f;
+
+            Console.WriteLine("Отрицательные элементы есть\n------------------------------------------------------------------------------------------------------------------------");
+
+            foreach (int a in first)
+            {
+                Console.WriteLine("В первой коллекции ");
+            }
+
+            foreach (int a in second)
+            {
+                Console.WriteLine("Во второй коллекции ");
+            }
+
+            foreach (int a in third)
+            {
+                Console.WriteLine("В третьей коллекции ");
+            }
+            foreach (int a in forth)
+            {
+                Console.WriteLine("В четвертой коллекции ");
+            }
+            Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+            do
+            {
+                Console.WriteLine("Для продолжения нажмите пробел");
+            }
+            while (Console.ReadKey().Key != ConsoleKey.Spacebar);
+            Console.Clear();
+        }
+
+
     }
 
-    class NumColl : IComparable<object>
+    class NumColl : IComparable<NumColl>
     {
+
+        Dictionary<int, int> forSort;
         public NumColl(Dictionary<int, int> numbers)
         {
-
+            this.forSort = numbers;
         }
-        public int CompareTo(object o)
+        public int CompareTo(NumColl o)
         {
             return 0;
         }
