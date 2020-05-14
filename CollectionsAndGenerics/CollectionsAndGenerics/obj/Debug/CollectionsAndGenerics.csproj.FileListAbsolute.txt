@@ -1,0 +1,6 @@
+C:\Users\user\Desktop\Epam\CollectionsAndGenerics\CollectionsAndGenerics\bin\Debug\CollectionsAndGenerics.exe.config
+C:\Users\user\Desktop\Epam\CollectionsAndGenerics\CollectionsAndGenerics\bin\Debug\CollectionsAndGenerics.exe
+C:\Users\user\Desktop\Epam\CollectionsAndGenerics\CollectionsAndGenerics\bin\Debug\CollectionsAndGenerics.pdb
+C:\Users\user\Desktop\Epam\CollectionsAndGenerics\CollectionsAndGenerics\obj\Debug\CollectionsAndGenerics.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Epam\CollectionsAndGenerics\CollectionsAndGenerics\obj\Debug\CollectionsAndGenerics.exe
+C:\Users\user\Desktop\Epam\CollectionsAndGenerics\CollectionsAndGenerics\obj\Debug\CollectionsAndGenerics.pdb
